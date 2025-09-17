@@ -1,3 +1,10 @@
+terraform {
+  backend "s3" {
+    bucket         = "terraform-wordpress-state-bucket-swen514"
+    key            = "terraform.tfstate"
+    region         = "us-east-1"
+  }
+}
 provider "aws" {
   region = "us-east-1"  # Set AWS region to US East 1 (N. Virginia)
 }
@@ -6,11 +13,7 @@ provider "aws" {
 locals {
     aws_key = "SWEN-Practice-Key"   # SSH key pair name for EC2 instance access
 }
-backend "s3" {
-  bucket         = "terraform-wordpress-state-bucket-swen514"
-  key            = "terraform.tfstate"
-  region         = "us-east-1"
-}
+
 
 # Security group to allow HTTP and SSH access
 resource "aws_security_group" "wordpress_sg" {
